@@ -22,14 +22,21 @@
         //     });
         const children = "hello world";
         const className = "container";
-        const props = {children,className}
-        const element  = <div {...props}/>
+        const props = { children, className }
+        const element = <div {...props} />
         console.log(element);
         ReactDOM.render(element, rootElement);
         // element.textContent = "hello world";
         // element.className="container";
         // rootElement.appendChild(element);
 
+        const Message = props => <div className="Message">{props.msg}</div>
+        const element1 = <div className="container">
+            <Message msg="start"/>
+            {Message({msg:"hello world"})}
+            {Message({msg:"goodbye world"})}
+        </div>
+        ReactDOM.render(element1, rootElement);
     </script>
 
 </body>
