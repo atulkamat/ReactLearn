@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+    <script type="text/babel">
+        function FormCheck(params) {
+            let [iCount, setCountValue] = React.useState(0);
+            let [sText, setTextValue] = React.useState(window.localStorage.getItem('name') || "");
+            React.useEffect(()=>{
+                window.localStorage.setItem('name',sText);
+            })
+            function onButtonClick(oEvent) {
+                iCount = ++iCount;
+                setCountValue(iCount)
+                // setState();
+            }
+            function onInputChange(oEvent) {
+                sText = oEvent.target.value;
+                setTextValue(sText);
+                // setState();
+            }
+            return (
+                <div>
+                    <div >number of clicks:{iCount}</div>
+                    <button onClick={onButtonClick}>click me</button>
+                    <form>
+                        <label htmlFor="name">enter name </label>
+                        <input id="name" value={sText} onChange={onInputChange} />
+                    </form>
+                    {sText}
+                </div>
+            );
+        }
+
+        const rootElement = document.getElementById("root");
+        ReactDOM.render(<FormCheck />, rootElement);
+    </script>
+
+</body>
+
+</html>
